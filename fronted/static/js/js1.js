@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function pop(e) {
 
         let amount = document.getElementById('all').innerHTML;
-         console.log(amount)
+
         switch (e.target.dataset.type) {
             case 'shadow':
             case 'line':
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 createParticle(x, y, e.target.dataset.type);
             }
         } else {
+            if (amount > 100) amount = 50
             for (let i = 0; i < amount; i++) {
                 createParticle(e.clientX, e.clientY, e.target.dataset.type);
             }

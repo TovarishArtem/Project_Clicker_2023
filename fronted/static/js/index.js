@@ -8,6 +8,8 @@ function call_click() {
         return Promise.reject(response)
     }).then(data => {
         document.getElementById('coins').innerText = data.core.coins
+            get_boost()
+
     }).catch(error => console.log(error))
 }
 
@@ -15,23 +17,89 @@ if (document.body.animate) {
   document.querySelector('#button').addEventListener('click', pop);
 }
 
-function pop (e) {
-  // Quick check if user clicked the button using a keyboard
-  if (e.clientX === 0 && e.clientY === 0) {
-    const bbox = document.querySelector('#button').getBoundingClientRect();
-    const x = bbox.left + bbox.width / 2;
-    const y = bbox.top + bbox.height / 2;
-    for (let i = 0; i < 30; i++) {
-      // We call the function createParticle 30 times
-      // We pass the coordinates of the button for x & y values
-      createParticle(x, y);
+
+function get_boost() {
+    fetch('/boosts/', {
+        method: 'GET'
+    }).then(response => {
+    if (response.ok) {
+        return response.json()
     }
-  } else {
-    for (let i = 0; i < 30; i++) {
-      // We call the function createParticle 30 times
-      // As we need the coordinates of the mouse, we pass them as arguments
-      createParticle(e.clientX, e.clientY);
+    return Promise.reject(response)
+    }).then( boosts => {
+        const panel = document.getElementById('boosts-holder')
+        panel.innerHTML = ''
+        let a = 0
+        boosts.forEach(boost => {
+            if (a<4) {
+
+
+                a = a + 1
+            add_boost(panel, boost) }
+
+            else pass
+
+        })
+    }).catch(error => console.log(error))
+}
+function add_boost(parent, boost) {
+    const button = document.createElement('button')
+    button.setAttribute('class', 'boost')
+    button.setAttribute('id',`boost_${boost.id}` )
+    button.setAttribute('onclick', `buy_boost(${boost.id})`)
+    button.innerHTML = `
+        <p>lvl: <span id="boost_level">${boost.lvl}</span></p>
+        <p>+<span id="boost_power">${boost.power}</span></p>
+        <p><span id="boost_level">${boost.price}</span></p>
+    `
+    parent.appendChild(button)
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i =0; i < cookies.length; i++) {
+            const  cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
     }
-  }
+    return cookieValue;
+}
+
+function buy_boost(boost_id) {
+    const csrftoken = getCookie('csrftoken')
+    fetch(`/boost/${boost_id}/`, {
+        method: 'PUT',
+        headers: {
+            "X-CSRFToken" : csrftoken,
+            'Content-Type' : 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) return response.json()
+        else return Promise.reject(response)
+    }).then (response => {
+        if (response.error) return
+        const  old_boost_stats = response.old_boost_stats
+        const  new_boost_stats = response.new_boost_stats
+
+        const coinsElement = document.getElementById('coins')
+        coinsElement.innerText = Number(coinsElement.innerText) - old_boost_stats.price
+        const powerElement =document.getElementById('click_power')
+        powerElement.innerText  = Number(powerElement.innerText) + old_boost_stats.power
+
+        update_boost(new_boost_stats)
+    }).catch(err => console.log(err))
+}
+function  update_boost(boost) {
+
+
+    const boost_node = document.getElementById(`boost_${boost.id}`)
+    boost_node.querySelector('#boost_level').innerText = boost.lvl
+    boost_node.querySelector('#boost_power').innerText = boost.power
+    boost_node.querySelector('#boost_price').innerText = boost.price
 }
 

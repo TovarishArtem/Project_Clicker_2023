@@ -26,6 +26,9 @@
 <div class="main">
     <div class="flex-container">
         <div class="info">
+            <div class="boosts-holder" id="boosts-holder">
+
+                    </div>
         </div>
 
         <div class="block">
@@ -57,15 +60,7 @@
 
                 <aside class="boosts" id="boosts">
                     <h3>Бусты</h3>
-                    <div class="boosts-holder" id="boosts-holder">
-                        {% for boost in boosts %}
-                            <button class="boost" id="boost_{{ boost.id }}" onclick="buy_boost({{ boost.id }})">
-                                <p>lvl: <span id="boost_level">{{ boost.level }}</span></p>
-                                <p>+<span id="boost_power">{{ boost.power }}</span></p>
-                                <p><span id="boost_price">{{ boost.price }}</span></p>
-                            </button>
-                        {% endfor %}
-                    </div>
+
                 </aside>
             </main>
 

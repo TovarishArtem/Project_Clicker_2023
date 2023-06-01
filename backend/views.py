@@ -26,13 +26,13 @@ class BoostViewSet(viewsets.ModelViewSet):
         core = Core.objects.get(user = self.request.user)
         boosts = Boost.objects.filter(core = core)
         return boosts
-    def patrial_update(self, request, pk, **kwargs):
-        boot = self.queryset.get(pk=pk)
+    def partial_update(self, request, pk, **kwargs):
+        boost = self.queryset.get(pk=pk)
         is_levelup = boost.levelup()
         if not is_levelup:
             return Response({'error': 'Не хватает денег'})
-        old_boost_ststs, new_boost_stats = is_levelup
+        old_boost_stats, new_boost_stats = is_levelup
         return Response({
-            'old_boost_ststs': self.serializer_class(old_boost_ststs).data,
+            'old_boost_stats': self.serializer_class(old_boost_stats).data,
             'new_boost_stats' : self.serializer_class(new_boost_stats).data
         })

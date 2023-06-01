@@ -7,7 +7,7 @@ boosts = views.BoostViewSet.as_view({
     'post': 'create'
 })
 lonely_boost = views.BoostViewSet.as_view({
-     'put' : 'patrial_update'
+     'put' : 'partial_update'
  })
 urlpatterns = [
 

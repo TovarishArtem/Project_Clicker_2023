@@ -12,10 +12,13 @@ from backend.models import Core
 
 
 def index(request):
-    coreModel = apps.get_model('backend', 'Core')
+
     user = User.objects.filter(id=request.user.id)
     if len(user) != 0:
-        core = Core.objects.get(user=request.user)
-        return render(request, 'main/index.html', {'core': core})
+        coreModel = apps.get_model('backend', 'Core')
+        boostModel = apps.get_model('backend', 'Boost')
+        core = coreModel.objects.get(user=request.user)
+        boosts = boostModel.objects.filter(core=core)
+        return render(request, 'main/index.html', {'core': core, 'boosts' : boosts})
     else:
         return redirect('login')
