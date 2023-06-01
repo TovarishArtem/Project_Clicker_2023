@@ -1,0 +1,92 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <title>Лучший кликер на планете</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js2.js' %}"></script>
+    <meta name="vieport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header__conteiner_conteiner">
+            <a href="" class="header_logo">
+            </a>
+            <nav class="menu">
+
+                <a class="glow-on-hover" href="{% url 'logout' %}">Выйти</a>
+
+            </nav>
+        </div>
+    </header>
+</div>
+<div class="main">
+    <div class="flex-container">
+        <div class="info">
+        </div>
+
+        <div class="block">
+            <main class="app">
+                <nav class="hello">
+                    Привет, {{ user.username }}
+
+
+                </nav>
+
+                <div class="container">
+                    <div id='coins'>{{ core.coins }}</div>
+                    <div class="button-flex">
+                        <div class="pomogi">
+                           <button data-type="square" id="btn" onclick="call_click()">Нажми меня</button>
+                        </div>
+                    </div>
+
+
+                    <p>
+                        Невероятная мощь клика: <span id="click_power">{{ core.click_power }}</span>
+                    </p>
+                     <span style="opacity: 0" id="all">{{ core.click_power }}</span>
+
+                    <div class="image1" id="ab">
+                    </div>
+                </div>
+
+
+                <aside class="boosts" id="boosts">
+                    <h3>Бусты</h3>
+                    <div class="boosts-holder" id="boosts-holder">
+                        {% for boost in boosts %}
+                            <button class="boost" id="boost_{{ boost.id }}" onclick="buy_boost({{ boost.id }})">
+                                <p>lvl: <span id="boost_level">{{ boost.level }}</span></p>
+                                <p>+<span id="boost_power">{{ boost.power }}</span></p>
+                                <p><span id="boost_price">{{ boost.price }}</span></p>
+                            </button>
+                        {% endfor %}
+                    </div>
+                </aside>
+            </main>
+
+
+    </div>
+
+    <div class="audio_putin">
+
+        <audio preload="auto"  loop autoplay controls>
+                        <source  class="music" src="/media/music/Oxxxymiron - Рукоблуд.... (zaycev.net)_(MP3Ball.ru).mp3" type="audio/mpeg" />
+                    </audio>
+        <div class="putin">
+
+                </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+</body>
+</html>

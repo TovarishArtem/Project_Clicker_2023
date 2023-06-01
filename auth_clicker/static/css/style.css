@@ -1,0 +1,47 @@
+body{
+     background-image: url("https://catherineasquithgallery.com/uploads/posts/2023-02/1676563752_catherineasquithgallery-com-p-besshovnii-fon-zelenii-3d-11.jpg");
+}
+header{
+    background-color: darkcyan;
+    color: white;
+    height: 100px;
+}
+
+h3{
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 20px;
+}
+
+main{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.logout{
+    position: relative;
+    text-align:center;
+    color: white;
+}
+
+.logout a {
+    color: rgb(209, 209, 209);
+    font-size: larger;
+}
+
+.logout a:hover{
+    color: white;
+    text-decoration: none;
+}
+.block{
+    background-color: black;
+    width: 500px;
+    height: auto;
+    margin: 0 auto;
+    color: white;
+    border-radius: 20px;
+     box-shadow:
+    0 0 6px 3px #76D300,
+    0 0 1px 6px #76D300,
+    0 0 14px 9px #76D300;
+}
