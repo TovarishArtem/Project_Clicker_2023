@@ -1,0 +1,104 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <title>Лучший кликер на планете</title>
+    <link rel="stylesheet" href="{% static 'css/index1.css' %}">
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_index1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js2.js' %}"></script>
+    <meta name="vieport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <script type="text/javascript">
+        function funonload() {
+           fetch('/boosts/', {
+        method: 'GET'
+    }).then(response => {
+    if (response.ok) {
+        return response.json()
+    }
+    return Promise.reject(response)
+    }).then( boosts => {
+        const panel = document.getElementById('boosts-holder')
+        panel.innerHTML = ''
+        let a = 0
+        boosts.forEach(boost => {
+            if (a<4) {
+
+
+                a = a + 1
+            add_boost(panel, boost) }
+
+            else pass
+
+        })
+    }).catch(error => console.log(error))
+        }
+    </script>
+</head>
+<body onload="funonload();" onchange="funonload()">
+<div class="wrapper">
+    <header class="header">
+        <div class="header__conteiner_conteiner">
+            <a href="" class="header_logo">
+            </a>
+            <nav class="menu">
+
+                <a class="glow-on-hover" href="{% url 'logout' %}">Выйти</a>
+
+            </nav>
+        </div>
+    </header>
+</div>
+<div class="main">
+    <div class="flex-container">
+        <div class="info">
+             <aside class="boosts" id="boosts">
+                    <p>Доступные бусты</p>
+             </aside>
+            <div   class="boosts-holder" id="boosts-holder"></div>
+        </div>
+
+        <div class="block">
+            <main class="app">
+                <nav class="hello">
+                    Привет, {{ user.username }}
+
+
+                </nav>
+
+                <div class="container">
+                    <div id='coins'>{{ core.coins }}</div>
+                    <div class="button-flex">
+                        <div class="pomogi">
+                           <button data-type="square" id="btn" onclick="call_click()">Нажми меня</button>
+                        </div>
+                    </div>
+
+                    <p>
+                        Невероятная мощь клика: <span id="click_power">{{ core.click_power }}</span>
+                    </p>
+                     <span style="opacity: 0" id="all">{{ core.click_power }}</span>
+
+
+                </div>
+
+            </main>
+
+
+    </div>
+
+    <div class="audio_putin">
+
+        <audio preload="auto"  loop autoplay controls>
+                        <source  class="music" src="/media/music/Oxxxymiron - Рукоблуд.... (zaycev.net)_(MP3Ball.ru).mp3" type="audio/mpeg" />
+                    </audio>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+</body>
+</html>
