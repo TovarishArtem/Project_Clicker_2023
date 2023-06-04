@@ -22,3 +22,27 @@ def index(request):
         return render(request, 'main/index.html', {'core': core, 'boosts' : boosts})
     else:
         return redirect('login')
+
+def index1(request):
+
+    user = User.objects.filter(id=request.user.id)
+    if len(user) != 0:
+        coreModel = apps.get_model('backend', 'Core')
+        boostModel = apps.get_model('backend', 'Boost')
+        core = coreModel.objects.get(user=request.user)
+        boosts = boostModel.objects.filter(core=core)
+        return render(request, 'main/index1.html', {'core': core, 'boosts' : boosts})
+    else:
+        return redirect('login')
+
+def index2(request):
+
+    user = User.objects.filter(id=request.user.id)
+    if len(user) != 0:
+        coreModel = apps.get_model('backend', 'Core')
+        boostModel = apps.get_model('backend', 'Boost')
+        core = coreModel.objects.get(user=request.user)
+        boosts = boostModel.objects.filter(core=core)
+        return render(request, 'main/index2.html', {'core': core, 'boosts' : boosts})
+    else:
+        return redirect('login')

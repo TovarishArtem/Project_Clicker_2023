@@ -8,7 +8,8 @@ function call_click() {
         return Promise.reject(response)
     }).then(data => {
         document.getElementById('coins').innerText = data.core.coins
-            get_boost()
+           if (data.is_levelup)
+               get_boost()
 
     }).catch(error => console.log(error))
 }

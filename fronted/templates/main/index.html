@@ -8,8 +8,34 @@
     <script type="text/javascript" src="{% static 'js/js2.js' %}"></script>
     <meta name="vieport" content="width=device-width">
     <meta name="viewport" content="width=device-width, user-scalable=no">
+    <script type="text/javascript">
+        function funonload() {
+           fetch('/boosts/', {
+        method: 'GET'
+    }).then(response => {
+    if (response.ok) {
+        return response.json()
+    }
+    return Promise.reject(response)
+    }).then( boosts => {
+        const panel = document.getElementById('boosts-holder')
+        panel.innerHTML = ''
+        let a = 0
+        boosts.forEach(boost => {
+            if (a<4) {
+
+
+                a = a + 1
+            add_boost(panel, boost) }
+
+            else pass
+
+        })
+    }).catch(error => console.log(error))
+        }
+    </script>
 </head>
-<body>
+<body onload="funonload();" onchange="funonload()">
 <div class="wrapper">
     <header class="header">
         <div class="header__conteiner_conteiner">
@@ -26,9 +52,10 @@
 <div class="main">
     <div class="flex-container">
         <div class="info">
-            <div class="boosts-holder" id="boosts-holder">
-
-                    </div>
+             <aside class="boosts" id="boosts">
+                    <p>Доступные бусты</p>
+             </aside>
+            <div   class="boosts-holder" id="boosts-holder"></div>
         </div>
 
         <div class="block">
@@ -57,11 +84,6 @@
                     </div>
                 </div>
 
-
-                <aside class="boosts" id="boosts">
-                    <h3>Бусты</h3>
-
-                </aside>
             </main>
 
 
