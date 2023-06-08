@@ -9,6 +9,8 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('a', views.index1, name='index1'),
+    path('b', views.index2, name='index2'),
+
 
 
 ]

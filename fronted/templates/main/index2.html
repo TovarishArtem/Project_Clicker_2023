@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
     <title>Лучший кликер на планете</title>
-    <link rel="stylesheet" href="{% static 'css/index1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index2.css' %}">
     <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/js_index1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js_index2.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/js2.js' %}"></script>
     <meta name="vieport" content="width=device-width">
     <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -45,17 +45,17 @@
                         <input checked type="radio" name="slider" id="switch1">
                         <input type="radio" name="slider" id="switch2">
                         <input type="radio" name="slider" id="switch3">
-                        <div id="slides">
+                        <div id="slides" style="max-height: 100px">
                             <div id="overflow">
                                 <div class="image">
+                                    <a href="{% url 'index2' %}">
+                                        <article><img src="/media/images/index1.png"></article>
+                                    </a>
                                     <a href="{% url 'index1' %}">
                                         <article><img src="/media/images/index2.png"></article>
                                     </a>
                                     <a href="{% url 'index' %}">
                                         <article><img src="/media/images/index.png"></article>
-                                    </a>
-                                    <a href="{% url 'index2' %}">
-                                        <article><img src="/media/images/index1.png"></article>
                                     </a>
 
 
@@ -76,9 +76,11 @@
             <div class="pustota" style=" max-width: 300px;  height: 100px; min-width: 300px"></div>
             <a href="" class="header_logo">
             </a>
+
             <nav class="menu">
 
-                <a class="glow-on-hover" href="{% url 'logout' %}">Выйти</a>
+
+                <a1 class="liquid" href="{% url 'logout' %}"><span>Выйти</span></a1>
 
             </nav>
         </div>
@@ -97,8 +99,6 @@
             <main class="app">
                 <nav class="hello">
                     Привет, {{ user.username }}
-
-
                 </nav>
 
                 <div class="container">
@@ -108,32 +108,18 @@
                             <button data-type="square" id="btn" onclick="call_click()">Нажми меня</button>
                         </div>
                     </div>
-
                     <p>
                         Невероятная мощь клика: <span id="click_power">{{ core.click_power }}</span>
                     </p>
                     <span style="opacity: 0" id="all">{{ core.click_power }}</span>
-
-
                 </div>
-
             </main>
-
-
         </div>
-
         <div class="audio_putin">
-
-
             <div class="putin">
-
             </div>
         </div>
-
     </div>
-
-
 </div>
-
 </body>
 </html>
