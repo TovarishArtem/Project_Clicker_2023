@@ -17,7 +17,7 @@ class UserList(generics.ListAPIView):
 
 def index(request):
     user = User.objects.filter(id=request.user.id)
-    if len(user)!=0:
+    if len(user)!= 0:
         coreModel = apps.get_model('backend', 'Core')
         boostsModel = apps.get_model('backend', 'Boost')
         core = coreModel.objects.get(user=request.user)
